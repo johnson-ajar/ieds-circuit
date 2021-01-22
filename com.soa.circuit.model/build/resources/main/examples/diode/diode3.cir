@@ -1,0 +1,6 @@
+#halfwave-rectifier
+
+v v1 1 0 5.0 ac SINE
+d d1 1 2 0.1
+r r1 2 0 640.0
+c c1 2 0 1.0mi

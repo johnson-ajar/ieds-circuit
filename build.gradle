@@ -1,0 +1,83 @@
+apply plugin: 'base'
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group 'ieds-circuit'
+version = '1.0.0'
+
+buildscript {
+ ext {
+ 	swaggerCodeGenVersion = '2.4.0'
+	 encoding = 'UTF-8'
+	 springBootVersion = '2.0.3.RELEASE'
+	 orientDBVersion = '3.0.13'
+
+	 apiPackage = "${circuitApiPackage}"
+	 modelPackage = "${circuitModelPackage}"
+	 invokerPackage = "${circuitInvokerPackage}"
+ }
+
+ repositories {
+	jcenter()
+	maven{url "http://localhost:8180/repository/public-repositories/"}
+ }
+ dependencies {
+ 	classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+  }
+}
+
+configure(allprojects) {
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+apply plugin: 'maven'
+
+
+
+repositories {
+  maven {
+	url "http://localhost:8180/repository/public-repositories/"
+ }
+}
+
+publishing{
+	repositories{
+    maven{
+  		url "http://localhost:8180/repository/ieds-circuit"
+  		credentials{
+  		 username 'admin'
+  		 password 'admin123'
+  		}
+    }
+	}
+}
+
+dependencies{
+ testCompile('junit:junit:4.12')
+ compile group: 'com.syncleus.ferma', name: 'ferma', version: '3.2.1'
+	compile group: 'com.orientechnologies', name: 'orientdb-core', version: "$rootProject.orientDBVersion"
+	compile group: 'com.orientechnologies', name: 'orientdb-object', version: "$rootProject.orientDBVersion"
+	compile group: 'com.orientechnologies', name: 'orientdb-client', version: "$rootProject.orientDBVersion"
+	// compile group: 'com.orientechnologies', name: 'orientdb-enterprise', version: '2.1.25'
+	compile group: 'com.orientechnologies', name: 'orientdb-graphdb', version: "$rootProject.orientDBVersion"
+	compile group: 'com.orientechnologies', name: 'orientdb-gremlin', version: "$rootProject.orientDBVersion"
+}
+
+}
+
+
+
+subprojects {
+	sourceCompatibility = 1.8
+	targetCompatibility = 1.8
+}
+//evaluationDependsOn(':com.soa.circuit.backend')
+evaluationDependsOn(':com.soa.circuit.model')
+evaluationDependsOn(':com.soa.circuit.service')
+dependencies{
+//	compile project(':com.soa.circuit.backend')
+	compile project(':com.soa.circuit.model')
+	compile project(':com.soa.circuit.service')
+}

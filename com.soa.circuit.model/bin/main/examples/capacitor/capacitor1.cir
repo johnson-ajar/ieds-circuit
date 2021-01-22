@@ -1,0 +1,14 @@
+#dc analysis of RC circuit
+#v v1 1 0 5.0 dc
+#r r1 1 2 100.0
+#c c1 2 0 10.0mi
+#r r2 2 3 100.0
+#c c2 3 0 10.0mi
+
+#transient-analysis
+v v1 1 0 5.0 ac SINE 40.0
+r r1 1 2 100.0
+d d1 2 3 0.1
+c c1 2 3 1mi
+r r2 2 0 10000.0
+r r3 3 0 500.0

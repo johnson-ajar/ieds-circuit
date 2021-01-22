@@ -1,0 +1,29 @@
+buildscript{
+ repositories{
+ 	jcenter()
+ }
+}
+
+group 'ieds-circuit'
+
+publishing {
+	publications {
+		mavenJava(MavenPublication){
+			groupId 'ieds.circuit'
+			artifactId 'com.soa.circuit.model'
+			version '1.0.0'
+      		from components.java
+		}
+	}
+}
+
+dependencies{
+	compile group:'colt', name:'colt', version: '1.2.0'
+	compile group: 'concurrent', name:'concurrent', version:'1.3.4'
+	compile ('ieds.tools:com.soa.tools.orientdb:1.0.0') {
+		//Excluding the module orientdb-enterprise of version 2.1.25 which is no longer required.
+		exclude group: 'com.orientechnologies'
+	}
+	compile group: 'com.github.yannrichet', name: 'JMathPlot', version: '1.0.1'
+}
+
