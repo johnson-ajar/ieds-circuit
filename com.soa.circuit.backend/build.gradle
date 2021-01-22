@@ -1,0 +1,74 @@
+
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+
+ 
+buildscript{
+ 
+ repositories {
+	jcenter()
+ }
+ dependencies {
+ 	classpath("org.springframework.boot:spring-boot-gradle-plugin:$rootProject.springBootVersion")
+ 	// classpath("javax.ws.rs:javax.ws.rs-api:2.1.1")
+ }
+}
+
+
+
+publishing {
+	publications {
+		mavenJava(MavenPublication){
+		groupId 'ieds.circuit'
+		artifactId 'com.soa.circuit.backend'
+		version '1.0.0'
+		from components.java
+		}
+	}
+}
+
+springBoot {
+	mainClassName = "com.soa.circuit.backend.Application"
+}
+
+bootJar {
+	println "Running bootJar [$projectDir.path]"
+	mainClassName = "com.soa.circuit.backend.Application"
+}
+
+evaluationDependsOn(':com.soa.circuit.model')
+
+dependencies{
+	compile project(':com.soa.circuit.model')
+	//compile group: 'com.soa.circuit', name: 'com.soa.circuit.model', version: '1.0.0'
+	compile group: 'org.assertj', name: 'assertj-core', version: '1.0.0'
+	compile group: 'com.orientechnologies', name: 'spring-data-orientdb-commons', version: '0.14'
+	compile group: 'com.orientechnologies', name: 'spring-boot-orientdb-autoconfigure', version: '0.14'
+	compile group: 'com.orientechnologies', name: 'spring-data-orientdb-object', version: '0.14'
+	compile group: 'com.orientechnologies', name: 'spring-data-orientdb-document', version:'0.14'
+	compile group: 'com.orientechnologies', name: 'spring-data-orientdb-graph', version: '0.14'
+	compile ("org.springframework.boot:spring-boot-starter-jersey:${rootProject.springBootVersion}") {
+		exclude group: 'javax.ws.rs'
+	}
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: "$rootProject.springBootVersion"
+	compile group: 'org.springframework', name: 'spring-web', version:'5.0.7.RELEASE'
+	compile group: 'org.springframework', name: 'spring-webmvc', version: '5.0.7.RELEASE'
+	compile group: 'org.springframework.data', name: 'spring-data-commons', version: '2.1.4.RELEASE'
+	compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.1.4.RELEASE'
+	
+	compile('io.swagger:swagger-jersey2-jaxrs:1.5.13') {
+		exclude group: 'javax.ws.rs'
+	}
+	compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+	compile 'javax.ws.rs:javax.ws.rs-api:2.1.1@jar'
+	
+	testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: '2.0.3.RELEASE'
+	testCompile group: 'org.springframework.boot', name: 'spring-boot-test', version: '2.0.3.RELEASE'
+	
+	
+	compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.6'
+	
+
+}
+

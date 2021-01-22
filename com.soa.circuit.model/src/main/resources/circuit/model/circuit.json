@@ -1,0 +1,10 @@
+{
+	"Circuit": {
+		"properties": {
+			"CircuitProperty": {
+				"type": "object",
+				"$ref":"./circuit-property.json#/CircuitProperty"
+			}
+		}
+	}
+}

@@ -1,0 +1,12 @@
+rootProject.name = 'ieds-circuit'
+def circuitAppName = 'com.soa.circuit'
+
+def circuitAppProject = "${circuitAppName}.application"
+def circuitModelProject = "${circuitAppName}.model"
+def circuitServiceProject = "${circuitAppName}.service"
+
+include circuitAppName
+//include 'com.soa.circuit.backend'
+include circuitAppProject
+include circuitModelProject
+include circuitServiceProject

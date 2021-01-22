@@ -1,0 +1,7 @@
+#transient-analysis
+v v1 1 0 5.0 ac SINE 40.0
+r r1 1 2 100.0
+d d1 2 3 0.1
+l l1 2 3 1.0
+r r2 2 0 10000.0
+r r3 3 0 500.0

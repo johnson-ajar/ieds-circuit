@@ -1,0 +1,53 @@
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+buildscript {
+	repositories {
+		jcenter()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:$rootProject.springBootVersion")
+	}
+}
+
+group 'ieds-circuit'
+
+publishing {
+	publications {
+		mavenJava(MavenPublication){
+			groupId 'ieds.circuit'
+			artifactId 'com.soa.circuit.service'
+			version '1.0.0'
+			from components.java
+		}
+	}
+}
+
+springBoot {
+	mainClassName = "com.soa.circuit.service.app.CircuitApplication"
+}
+
+bootRun {
+	mainClass = "com.soa.circuit.service.app.CircuitApplication"
+}
+
+bootJar {
+	println "Running bootJar [$projectDir.path]"
+	mainClassName = "com.soa.circuit.service.app.CircuitApplication"
+}
+
+evaluationDependsOn(':com.soa.circuit.model')
+dependencies {
+compile project(':com.soa.circuit.model')
+compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.6'
+compile 'javax.ws.rs:javax.ws.rs-api:2.1.1@jar'
+compile('io.swagger:swagger-jersey2-jaxrs:1.5.13') {
+		exclude group: 'javax.ws.rs'
+}	
+compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: "$rootProject.springBootVersion"
+compile ("org.springframework.boot:spring-boot-starter-jersey:${rootProject.springBootVersion}") {
+		exclude group: 'javax.ws.rs'
+}
+compile group: 'org.springframework.data', name: 'spring-data-commons', version: '2.1.4.RELEASE'
+compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.1.4.RELEASE'	
+}

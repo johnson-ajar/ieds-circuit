@@ -1,0 +1,98 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "1.0.0",
+		"title": "Circuit API",
+		"description": "Circuit api to handle circuit model",
+		"termsOfService": "http://swagger.io/terms/",
+		"contact": {
+			"name": "Johnson Abraham"
+		},
+		"license": {
+			"name": "Apache 2.0",
+			"url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+		}
+	},
+	"basePath": "/api/v1",
+	"tags": [{
+		"name": "circuit",
+		"description": "Its about the circuit service",
+		"extenalDocs" : {
+			"description": "Find out more about swagger io.",
+			"url": "http://swagger.io"
+		}
+	}],
+	"schemes": ["http"],
+	"consumes": ["application/json"],
+	"produces": ["application/json"],
+	"paths": {
+		"/datasets": {
+			"get": {
+				"tags": ["circuit"],
+				"summary": "All the circuits available in the datastore will be returned.",
+				"description": "Returns all the circuits in the datastore",
+				"operationId": "getCircuits",
+				"produces": [
+					"application/json"
+				],
+				"responses": {
+					"200": {
+						"description": "circuit response",
+						"schema": {
+							"type": "array",
+							"items": {
+								"$ref": "#/definitions/Circuit"
+							}
+						}
+					}
+				}
+			},
+			"post": {
+				"tags": ["circuit"],
+				"summary": "adding a circuit to the database",
+				"description": "Adding a circuit to the dataset",
+				"operationId": "addCircuit",
+				"produces": [
+					"application/json"
+				],
+				"consumes": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"in": "body",
+						"name": "circuit",
+						"description": "circuit object",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/Circuit"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "circuit has been added to the datastore.",
+						"schema": {
+							"type": "object",
+							"$ref": "#/definitions/Circuit"
+						}
+					}
+				}
+			}
+		}
+	},
+	
+	"definitions": {
+		"Circuit": {
+			"type": "object",
+			"$ref": "./model/circuit.json#/Circuit",
+			"xml": {
+						"name": "Circuit"
+					}
+			}
+	},
+	"externalDocs": {
+		"description": "Find out more about Swagger.",
+		"url": "http://swagger.io"
+	}
+}
