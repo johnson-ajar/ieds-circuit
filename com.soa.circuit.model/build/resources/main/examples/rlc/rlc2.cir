@@ -1,6 +1,0 @@
-#RLC-Parallel
-v v1 1 0 5.0 ac SINE 30.0
-r r1 1 2 2000.0
-l l1 1 2 1.0
-c c1 1 2 15mi
-r r2 2 0 100.0
