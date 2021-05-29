@@ -1,4 +1,4 @@
-M2-test1
+M3-test1
 
 # ieds-circuit
 # Swagger generated server
